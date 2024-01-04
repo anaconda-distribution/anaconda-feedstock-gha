@@ -1,0 +1,42 @@
+# Apply to all files without commiting:
+#   pre-commit run --all-files
+# Update this file:
+#   pre-commit autoupdate
+# This prevents `pre-commit` from using a newer version of Python, which may cause `pylint` to emit extra errors.
+default_language_version:
+    python: python3.11
+exclude: |
+  (?x)^(
+    tests/test_aux_files/.*|
+    docs/.*|
+    setup.py|
+  )$
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+        exclude_types: ["json"]
+      - id: check-ast
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.3
+    hooks:
+      - id: check-github-actions
+      - id: check-github-workflows
+      - id: check-renovate
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        args: [--write]
