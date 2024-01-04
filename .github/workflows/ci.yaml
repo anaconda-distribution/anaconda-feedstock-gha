@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+name: Feedstock Workflows
+
+jobs:
+  auto-lint:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        - uses: ./.github/actions/setup-env
+          with:
+            python-version: "3.11"
+        # TODO: pull down the feedstock to lint, run the auto-fix routine, comment a report
+        - run: |
+            source $CONDA/bin/activate
+            conda activate anaconda-linter
