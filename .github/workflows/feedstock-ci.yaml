@@ -1,9 +1,5 @@
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-
+  workflow_call:
 
 name: Feedstock Workflows
 
@@ -15,7 +11,9 @@ jobs:
         - uses: ./.github/actions/setup-env
           with:
             python-version: "3.11"
-        # TODO: pull down the feedstock to lint, run the auto-fix routine, comment a report
+        # TODO: run the auto-fix routine, comment to report
+        # TODO: calling workflow needs to checkout to `feedstock/`
         - run: |
             source $CONDA/bin/activate
             conda activate anaconda-linter
+            conda-lint --fix feedstock/
