@@ -8,9 +8,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        - uses: ./.github/actions/setup-env
-          with:
-            python-version: "3.11"
+        - uses: ./.github/actions/auto-lint-feedstock
         # TODO: run the auto-fix routine, comment to report
         # TODO: calling workflow needs to checkout to `feedstock/`
         - run: |
