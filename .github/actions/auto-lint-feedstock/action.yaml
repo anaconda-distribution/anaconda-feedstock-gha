@@ -10,7 +10,7 @@ runs:
   steps:
     - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
       with:
-        python-version: $PYTHON_VERSION
+        python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'
     - name: Cache conda env
       id: cache-conda
@@ -32,7 +32,7 @@ runs:
         conda update -n base -c defaults conda
         source $CONDA/etc/profile.d/conda.sh
         conda init bash
-        conda create --name anaconda-linter -y python=$PYTHON_VERSION
+        conda create --name anaconda-linter -y python=${{ env.PYTHON_VERSION }}
         conda install --name anaconda-linter -c distro-tooling -y anaconda-linter
         source $CONDA/bin/activate
         conda activate anaconda-linter
