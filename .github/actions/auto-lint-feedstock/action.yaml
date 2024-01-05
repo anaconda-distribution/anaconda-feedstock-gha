@@ -3,14 +3,14 @@ description: Set up an anaconda-linter environment
 
 env:
   # The version of Python to use by all steps.
-  PYTHON_VERSION: "3.11"
+  LINTER_PYTHON_VERSION: "3.11"
 
 runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
+        python-version: ${{ env.LINTER_PYTHON_VERSION }}
         cache: 'pip'
     - name: Cache conda env
       id: cache-conda
@@ -32,7 +32,7 @@ runs:
         conda update -n base -c defaults conda
         source $CONDA/etc/profile.d/conda.sh
         conda init bash
-        conda create --name anaconda-linter -y python=${{ env.PYTHON_VERSION }}
+        conda create --name anaconda-linter -y python=${{ env.LINTER_PYTHON_VERSION }}
         conda install --name anaconda-linter -c distro-tooling -y anaconda-linter
         source $CONDA/bin/activate
         conda activate anaconda-linter
